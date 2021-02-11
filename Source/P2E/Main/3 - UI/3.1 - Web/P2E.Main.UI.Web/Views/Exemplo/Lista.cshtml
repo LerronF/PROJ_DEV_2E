@@ -1,0 +1,59 @@
+﻿@model List<P2E.Main.API.ViewModel.ExemploVM>
+@{
+    ViewData["Title"] = "Lista de Exemplos";
+    ViewData["PageName"] = "exemplo_lista";
+    ViewData["Category1"] = "Exemplo";
+
+    //Alert info
+    var type = (string)TempData["_alert.type"];
+    var title = (string)TempData["_alert.title"];
+    var body = (string)TempData["_alert.body"];
+}
+
+<div class="row">
+    <div class="col-xl-12">
+
+        @if (!string.IsNullOrEmpty(type))
+        {
+            <div class="alert alert-@type alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>@title</strong> @body
+            </div>
+        }
+
+        <div class="panel">
+            <div class="panel-hdr">
+                <h1>
+                    Lista de Exemplos
+                </h1>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <a asp-action="Cadastro" class="btn btn-primary float-right mb-4"><i class="fal fa-plus-circle"></i>&nbsp;&nbsp;Adicionar</a>
+                    <table class="table table-bordered table-hover m-0">
+                        <thead class="thead-themed">
+                            <tr>
+                                <th>#</th>
+                                <th>Descrição</th>
+                                <th>Valor</th>
+                                <th colspan="2"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.ExemploId</td>
+                                    <td>@item.Descricao</td>
+                                    <td>@item.Valor</td>
+                                    <td class="text-center"><a asp-action="Cadastro" asp-route-id="@item.ExemploId"><i style="font-weight:bold;cursor:pointer" class="fal fa-trash-alt text-danger"></i></a></td>
+                                    <td class="text-center"><a asp-action="Cadastro" asp-route-id="@item.ExemploId"><i style="font-weight:bold;cursor:pointer" class="fal fa-edit text-success"></i></a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

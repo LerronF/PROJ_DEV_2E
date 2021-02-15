@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -15,6 +11,10 @@ using P2E.Main.Domain.Repositories;
 using P2E.Main.Infra.Data.DataContext;
 using P2E.Main.Infra.Data.Repositories;
 using Swashbuckle.AspNetCore.Swagger;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace P2E.Main.API
 {
@@ -40,6 +40,8 @@ namespace P2E.Main.API
 
             services.AddScoped<MainContext, MainContext>();
             services.AddTransient<IExemploRepository, ExemploRepository>();
+            services.AddTransient<ITabelaAuxiliarRepository, TabelaAuxiliarRepository>();
+            //services.AddTransient<IServicoRepository, ServicoRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

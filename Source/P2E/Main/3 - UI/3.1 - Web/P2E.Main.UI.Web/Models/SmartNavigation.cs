@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
+using System.Collections.Generic;
 
 // ReSharper disable AutoPropertyCanBeMadeGetOnly.Global
 // ReSharper disable MemberCanBePrivate.Global
@@ -56,8 +56,19 @@ namespace P2E.Main.UI.Web.Models
         public bool Disabled { get; set; }
         public List<ListItem> Items { set; get; } = new List<ListItem>();
         public Span Span { get; set; } = new Span();
+        
+        public List<ItemAssociado> Associados { get; set; }
+        public string  jsonAssociados { get; set; }
+
     }
 
+
+    public class ItemAssociado
+    {
+        public string Title { get; set; }
+        public string Text { get; set; }
+        public string Href { get; set; }
+    }
     public sealed class Span
     {
         public string Position { get; set; }

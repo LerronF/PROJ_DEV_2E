@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using P2E.Importacao.Domain.Repositories;
+using P2E.Importacao.Infra.Data.DataContext;
+using P2E.Importacao.Infra.Data.Repository;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace P2E.Importacao.API
@@ -26,16 +23,41 @@ namespace P2E.Importacao.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddAutoMapper();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddControllersAsServices();
+            services.AddMvc().ConfigureApiBehaviorOptions(o =>
+            {
+                o.InvalidModelStateResponseFactory = context =>
+                {
+                    var error = new
+                    {
+                        Detail = "Custom error"
+                    };
+
+                    return new BadRequestObjectResult(error);
+                };
+            });
+
+            services.AddAutoMapper();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "P2E [Importação-API]", Version = "v1" });
             });
 
-            //services.AddScoped<MainContext, MainContext>();
-            //services.AddTransient<IExemploRepository, ExemploRepository>();
+            services.AddSingleton<IConfiguration>(Configuration);
+
+            services.AddScoped<ImportacaoContext, ImportacaoContext>();
+            services.AddTransient<IImportacaoRepository, ImportacaoRepository>();
+            services.AddTransient<IHistoricoRepository, HistoricoRepository>();
+            services.AddTransient<IVistoriaRepository, VistoriaRepository>();
+            services.AddTransient<IEnvioPLIRepository, EnvioPLIRepository>();
+            services.AddTransient<IDetalheNCMRepository, DetalheNCMRepository>();
+            services.AddTransient<ITaxaConversaoCambioRepository, TaxaConversaoCambioRepository>();
+            services.AddTransient<IMoedaRepository, MoedaRepository>();
+            services.AddTransient<INCMRepository, NCMRepository>();
+            services.AddTransient<ITriagemBotRepository, TriagemBotRepository>();
+            services.AddTransient<ICEMercanteRepository, CEMercanteRepository>();
+            services.AddTransient<ICEMercanteItensRepository, CEMercanteItensRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,29 +66,45 @@ namespace P2E.Importacao.API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
             }
             else
             {
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
-
-
-            // Enable middleware to serve generated Swagger as a JSON endpoint.
-            app.UseSwagger();
-
-            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
-            // specifying the Swagger JSON endpoint.
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "P2E Importação - API V1");
-                c.RoutePrefix = "api/docs";
-                c.DocumentTitle = "P2E Importação - API";
-            });
-
             app.UseMvc();
-
         }
+
+        //public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        //{
+        //    if (env.IsDevelopment())
+        //    {
+        //        app.UseDeveloperExceptionPage();
+        //    }
+        //    else
+        //    {
+        //        app.UseHsts();
+        //    }
+
+        //    app.UseHttpsRedirection();
+
+
+        //    // Enable middleware to serve generated Swagger as a JSON endpoint.
+        //    app.UseSwagger();
+
+        //    // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
+        //    // specifying the Swagger JSON endpoint.
+        //    app.UseSwaggerUI(c =>
+        //    {
+        //        c.SwaggerEndpoint("/swagger/v1/swagger.json", "P2E Importação - API V1");
+        //        c.RoutePrefix = "api/docs";
+        //        c.DocumentTitle = "P2E Importação - API";
+        //    });
+
+        //    app.UseMvc();
+
+        //}
     }
 }

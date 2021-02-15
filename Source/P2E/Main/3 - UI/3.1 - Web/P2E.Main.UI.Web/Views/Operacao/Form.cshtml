@@ -1,0 +1,58 @@
+﻿@model P2E.Main.UI.Web.Models.SSO.Operacao.OperacaoViewModel
+@{
+    ViewData["Title"] = "Cadastro";
+    ViewData["PageName"] = "operacao_cadastro";
+    ViewData["Category1"] = "Operação";
+
+    //Alert info
+    var type = (string)TempData["_alert.type"];
+    var title = (string)TempData["_alert.title"];
+    var body = (string)TempData["_alert.body"];
+}
+
+<div class="row">
+    <div class="col-xl-12">
+
+        @if (!string.IsNullOrEmpty(type))
+        {
+            <partial name="_DisplayMessagePartial" />
+        }
+        <div class="panel">
+            <div class="panel-hdr">
+                @if (Model.CD_OPR > 0)
+                {
+                    <h1>
+                        Edição de Operação
+                    </h1>
+                }
+                else
+                {
+                    <h1>
+                        Cadastro de Operação
+                    </h1>
+                }
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <form asp-action="Save" method="post">
+                        <input type="hidden" asp-for="CD_OPR" />
+                        <div class="form-group">
+                            <label class="form-label" asp-for="TX_DSC">Descrição</label>
+                            <input type="text" maxlength="100" asp-for="TX_DSC" placeholder="Descrição" class="form-control">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <button type="button" class="btn btn-primary" value="Cancel" onclick="history.back();">Cancelar</button>
+                        <button data-id="@Model.CD_OPR"
+                                data-controller="Operacao"
+                                data-action="Delete"
+                                data-body-message="Deseja excluir esta Operação?"
+                                style="font-weight:normal;cursor:pointer" class="delete btn btn-danger">
+                            Deletar
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

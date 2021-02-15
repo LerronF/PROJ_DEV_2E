@@ -1,0 +1,156 @@
+<!-- begin:: Page -->
+<ng-container *ngIf="selfLayout !== 'blank'; else blankLayout">
+	<!-- begin:: Header Mobile -->
+	<kt-header-mobile></kt-header-mobile>
+	<!-- end:: Header Mobile -->
+
+	<div class="kt-grid kt-grid--hor kt-grid--root">
+		<!-- begin::Body -->
+		<div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver kt-page">
+			<!-- begin:: Aside Left -->
+			<ng-container *ngIf="asideDisplay">
+				<button class="kt-aside-close" id="kt_aside_close_btn"><i class="la la-close"></i></button>
+				<kt-aside-left></kt-aside-left>
+			</ng-container>
+			<!-- end:: Aside Left -->
+
+			<div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-wrapper" id="kt_wrapper">
+				<!-- begin:: Header -->
+				<kt-header *ngIf="desktopHeaderDisplay"></kt-header>
+				<!-- end:: Header -->
+
+				<!-- begin:: Content -->
+				<div class="kt-content kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content"
+					style="margin-top: -60px;" [ngClass]="{'kt-content--fit-top': fitTop}">
+					<!-- begin:: Content Head -->
+					<kt-subheader *ngIf="subheaderDisplay"></kt-subheader>
+					<!-- end:: Content Head -->
+					{{ultimaTab}}
+					<!-- begin:: Content Body -->
+					<div ktContentAnimate class="kt-container kt-grid__item kt-grid__item--fluid"
+						[ngClass]="{'kt-container--fluid': fluid}">
+
+						<versattily-home *ngIf="AbasAbertas?.length == 0"></versattily-home>
+
+						<mat-tab-group class="card" [selectedIndex]="abas.SelectedTab" #tabs>
+
+							<mat-tab *ngFor="let aba of AbasAbertas">
+
+								<div *ngIf="aba == 'Parceiro de Negócio'">
+									<ng-template mat-tab-label class="card">
+
+										Parceiros de Negócio<button  (click)="exibirModal(content7,'Parceiros de Negócio')"
+										 style="margin-left: 20px;
+											color: white;
+											background-color: #646c9a;
+											font-size: 12px;"><i class="flaticon2-cancel"></i></button>
+
+									</ng-template>
+
+									<versattily-parceironegocio></versattily-parceironegocio>
+								</div>
+
+								<div *ngIf="aba == 'Usuário'">
+									<ng-template mat-tab-label>
+
+										Usuários
+										<button  (click)="exibirModal(content7,'Usuários')"
+											style="margin-left: 20px;
+												color: white;
+												background-color: #646c9a;
+												font-size: 12px;"><i class="flaticon2-cancel"></i></button>
+									</ng-template>
+									<versattily-usuario></versattily-usuario>
+								</div>
+								<div *ngIf="aba == 'Rotinas'">
+									<ng-template mat-tab-label class="card">
+
+										Rotinas
+										<button (click)="exibirModal(content7,'Rotinas')"
+										 style="margin-left: 20px;
+													color: white;
+													background-color: #646c9a;
+													font-size: 12px;"><i class="flaticon2-cancel" ></i></button>
+									</ng-template>
+									<versattily-rotina></versattily-rotina>
+								</div>
+								<div *ngIf="aba == 'Grupos de Usuários'">
+									<ng-template mat-tab-label class="card">
+
+										Grupos de Usuário
+										<button (click)="exibirModal(content7,'Grupos de Usuários')" 
+										 style="margin-left: 20px;
+														color: white;
+														background-color: #646c9a;
+														font-size: 12px;"><i class="flaticon2-cancel" ></i></button>
+									</ng-template>
+
+									<versattily-grupo></versattily-grupo>
+								</div>
+								<div *ngIf="aba == 'Serviços'">
+									<ng-template mat-tab-label class="card">
+
+										Serviços
+										<button (click)="exibirModal(content7,'Serviços')"
+										 style="margin-left: 20px;
+															color: white;
+															background-color: #646c9a;
+															font-size: 12px;"><i class="flaticon2-cancel" ></i></button>
+									</ng-template>
+
+									<versattily-servico-lista></versattily-servico-lista>
+								</div>
+
+							</mat-tab>
+
+						
+
+						</mat-tab-group>
+
+
+
+
+
+
+						<!-- <router-outlet></router-outlet> -->
+					</div>
+					<!-- end:: Content Body -->
+				</div>
+				<!-- end:: Content -->
+
+				<kt-footer></kt-footer>
+			</div>
+		</div>
+		<!-- end:: Body -->
+
+		<kt-scroll-top></kt-scroll-top>
+	</div>
+</ng-container>
+<!-- end:: Page -->
+
+<ng-template #blankLayout>
+	<router-outlet></router-outlet>
+</ng-template>
+
+
+<div class="kt-section">
+    <div class="kt-section__content">
+        <ng-template #content7 let-c="close" let-d="dismiss">
+            <div class="modal-header">
+                <h4 class="modal-title">Fechar aba {{abaFechar}}</h4>
+                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Fechando a aba você perderá qualquer alteração feita. Deseja realmente fechar?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="c('Close click')">Cancelar</button>
+                <button type="button" class="btn btn-danger" (click)="fecharAba()">Confirmar</button>
+            </div>
+        </ng-template>
+    </div>
+</div>

@@ -53,11 +53,11 @@
                                 }
                             }
                             <text>
-                                <a href="@item.Route" title="@item.Title" data-filter-tags="@item.Tags">
-                                    <span class="nav-link-text" data-i18n="@item.I18n">@item.Text</span>
+                                <a class="link_associados" href="@item.Route" title="@item.Title" data-filter-tags="@item.Tags" target="@item.Title" data-associados="@item.jsonAssociados">
+                                    <span class="link_associados nav-link-text" data-i18n="@item.I18n">@item.Text</span>
                                     @if (item.Span.HasValue())
                                     {
-                                    <span class="@item.Span.Class">@item.Span.Text</span>
+                                        <span class="@item.Span.Class">@item.Span.Text</span>
                                     }
                                 </a>
                             </text>
@@ -70,24 +70,24 @@
                                             if (subItem.Disabled)
                                             {
                                                 <text>
-                                                    <li class="disabled">
-                                                </text>
-                                            }
-                                            else
-                                            {
-                                                <text>
-                                                <li class="@(ViewBag.PageName == System.IO.Path.GetFileNameWithoutExtension(subItem.Href) ? "active" : "")">
-                                                </text>
-                                            }
-                                            <a href="@subItem.Route" title="@subItem.Title" data-filter-tags="@subItem.Tags">
-                                                <span class="nav-link-text" data-i18n="@subItem.I18n">@subItem.Text</span>
-                                            </a>
-                                            @:</li>
-                                        }
-                                    </ul>
+                                                <li class="disabled">
                                 </text>
                             }
+                            else
+                            {
+                                <text>
+                                <li class="link_associados @(ViewBag.PageName == System.IO.Path.GetFileNameWithoutExtension(subItem.Href) ? "active" : "")">
+                                </text>
+                            }
+                            <a href="#@subItem.Route" title="@subItem.Title" data-filter-tags="@subItem.Tags">
+                                <span class="nav-link-text" data-i18n="@subItem.I18n">@subItem.Text</span>
+                            </a>
                         @:</li>
+                    }
+                                    </ul>
+                                    </text>
+                                }
+                            @:</li>
                         }
                     }
                 </ul>
@@ -99,3 +99,16 @@
         }
     }
 </ul>
+
+@section Scripts {
+    <script language="Javascript">
+
+        //function teste() {
+        //    alert("xxx");
+        //    //window.open("janela1.htm", "banner"); (banner é meu target 1)
+
+        //    //window.open("janela2.htm", "principal"); (principal é meu target 2)
+
+        //}
+    </script>
+}

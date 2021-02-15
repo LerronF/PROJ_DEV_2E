@@ -1,0 +1,84 @@
+<!-- <div *ngIf="salvouSucesso || excluidoSucesso" style="padding-left: 20px;padding-right: 20px;">
+    <ngb-alert [type]="'success'" *ngIf="salvouSucesso" (close)="salvouSucesso=false"> Registro salvo com sucesso!
+    </ngb-alert>
+    <ngb-alert [type]="'success'" *ngIf="excluidoSucesso" (close)="excluidoSucesso=false"> Registro excluído com
+        sucesso!</ngb-alert>
+</div> -->
+
+<kt-portlet>
+    <kt-portlet-header [sticky]="false" [title]="'Lista de Usuários'" [class]="'kt-portlet__head--lg'">
+        <ng-container ktPortletTools>
+            <a (click)="adicionarUsuario()" class="btn btn-primary kt-margin-r-10" mat-raised-button
+                [hidden]="verificarPermissao('Criar') === false">
+                <i class="la la-plus"></i>
+                <span class="kt-hidden-mobile">Novo usuário</span>
+            </a>
+        </ng-container>
+    </kt-portlet-header>
+    <!-- end::Header -->
+
+    <kt-portlet-body>
+
+        <div class="form-group row col-lg-6 mb-0"  style="max-height:50px;">
+            <label class="col-form-label"  style="margin-left: 20px;">Pesquisar:</label>
+            <div class="col-lg-8 example-container">
+                <mat-form-field class="col-lg-12">
+                    <input matInput placeholder="Digite o nome do usuário" #filtro
+                        class="mat-form-field mat-form-field-fluid" maxlength="40">
+                </mat-form-field>
+            </div>
+        </div>
+
+
+        <div class="mat-table__wrapper">
+
+            <mat-table matSort matSortActive="TX_NOME" matSortDirection="asc" matSortDisableClear
+                class="lessons-table mat-elevation-z8" [dataSource]="dataSource">
+
+                <ng-container matColumnDef="TX_NOME">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Nome</mat-header-cell>
+                    <mat-cell *matCellDef="let usuario">{{usuario.TX_NOME}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="TX_LOGIN">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Login</mat-header-cell>
+                    <mat-cell class="description-cell" *matCellDef="let usuario">{{usuario.TX_LOGIN}}</mat-cell>
+
+                </ng-container>
+
+                <ng-container matColumnDef="NomeStatus">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+                    <mat-cell class="duration-cell" *matCellDef="let usuario">{{usuario.NomeStatus}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="editar">
+                    <mat-header-cell style="flex: 0 0 75px;" *matHeaderCellDef>
+                    </mat-header-cell>
+                    <mat-cell style="flex: 0 0 75px;" *matCellDef="let usuario">
+                        <a class="btn btn-secondary kt-margin-r-10" mat-icon-button color="primary"
+                            [hidden]="verificarPermissao('Visualizar') === false"
+                            (click)="visualizarUsuario(usuario.CD_USR)" matTooltip="Visualizar Usuário">
+                            <mat-icon>search</mat-icon>
+                        </a>
+
+                    </mat-cell>
+                </ng-container>
+
+
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+                <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+            </mat-table>
+        </div>
+        <div class="mat-table__bottom">
+            <mat-spinner [diameter]="20" *ngIf="dataSource.loading$ | async"></mat-spinner>
+            <mat-paginator [pageSize]="10" [pageSizeOptions]="[3, 5, 10]" [length]="dataSource.totalItems$ | async"
+                [showFirstLastButtons]="true">
+            </mat-paginator>
+        </div>
+        <!-- end: BOTTOM -->
+    </kt-portlet-body>
+    <!-- end::Body -->
+</kt-portlet>

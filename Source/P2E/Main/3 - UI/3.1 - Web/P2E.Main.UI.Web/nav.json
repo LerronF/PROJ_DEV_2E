@@ -1,83 +1,141 @@
 ﻿{
-  "version": 4.0,
+  "version": 1.0,
   "lists": [
+    //{
+    //  "title": "Exemplo",
+    //  "icon": "fal fa-info-circle",
+    //  "items": [
+    //    {
+    //      "title": "Listagem",
+    //      "href": "exemplo_lista.html"
+    //    }
+    //  ]
+    //},
+    //{
+    //  "title": "Serviços",
+    //  "icon": "fal fa-key",
+    //  "items": [
+    //    {
+    //      "title": "Lista",
+    //      "href": "/servico"
+    //    }
+    //  ]
+    //},
+    //{
+    //  "title": "Importação",
+    //  "icon": "fal fa-cloud-download",
+    //  "items": [
+    //    {
+    //      "title": "Lista",
+    //      "href": "1exemplo_lista.html"
+    //    },
+    //    {
+    //      "title": "Novo",
+    //      "href": "2exemplo_novo.html"
+    //    }
+    //  ]
+    //},
+    //{
+    //  "title": "Exportação",
+    //  "icon": "fal fa-cloud-upload",
+    //  "items": [
+    //    {
+    //      "title": "Lista",
+    //      "href": "3exemplo_lista.html"
+    //    },
+    //    {
+    //      "title": "Novo",
+    //      "href": "4exemplo_novo.html"
+    //    }
+    //  ]
+    //},
+    //{
+    //  "title": "Dashboard",
+    //  "icon": "fal fa-chart-bar",
+    //  "items": [
+    //    {
+    //      "title": "Lista",
+    //      "href": "5exemplo_lista.html"
+    //    },
+    //    {
+    //      "title": "Novo",
+    //      "href": "6exemplo_novo.html"
+    //    }
+    //  ]
+    //},
+    //{
+    //  "title": "Faturamento",
+    //  "icon": "fal fa-chart-line",
+    //  "items": [
+    //    {
+    //      "title": "Lista",
+    //      "href": "7exemplo_lista.html"
+    //    },
+    //    {
+    //      "title": "Novo",
+    //      "href": "77exemplo_novo.html"
+    //    }
+    //  ]
+    //},
+    //{
+    //  "title": "Financeiro",
+    //  "icon": "fal fa-money-bill",
+    //  "items": [
+    //    {
+    //      "title": "Lista",
+    //      "href": "8exemplo_lista.html"
+    //    },
+    //    {
+    //      "title": "Novo",
+    //      "href": "88exemplo_novo.html"
+    //    }
+    //  ]
+    //},
     {
-      "title": "Exemplo",
-      "icon": "fal fa-info-circle",
+      "title": "Segurança",
+      "icon": "fal fa-address-card",
       "items": [
         {
-          "title": "Listagem",
-          "href": "exemplo_lista.html"
+          "title": "Usuários",
+          "href": "/usuario"
+        },
+        {
+          "title": "Rotinas",
+          "href": "/rotina"
+        },
+        {
+          "title": "Operações",
+          "href": "/operacao"
+        },
+        {
+          "title": "Módulos",
+          "href": "/modulo"
+        },
+        {
+          "title": "Grupos",
+          "href": "/grupo"
+        },
+        {
+          "title": "Parceiro de Negócio",
+          "href": "/ParceiroNegocio"
+        },
+        {
+          "title": "Serviços",
+          "href": "/servico"
         }
       ]
     },
     {
       "title": "Importação",
-      "icon": "fal fa-cloud-download",
+      "icon": "fal fa-address-card",
       "items": [
         {
-          "title": "Lista",
-          "href": "1exemplo_lista.html"
+          "title": "Detalhes NCM",
+          "href": "/detalhencm"
         },
         {
-          "title": "Novo",
-          "href": "2exemplo_novo.html"
-        }
-      ]
-    },
-    {
-      "title": "Exportação",
-      "icon": "fal fa-cloud-upload",
-      "items": [
-        {
-          "title": "Lista",
-          "href": "3exemplo_lista.html"
-        },
-        {
-          "title": "Novo",
-          "href": "4exemplo_novo.html"
-        }
-      ]
-    },
-    {
-      "title": "Dashboard",
-      "icon": "fal fa-chart-bar",
-      "items": [
-        {
-          "title": "Lista",
-          "href": "5exemplo_lista.html"
-        },
-        {
-          "title": "Novo",
-          "href": "6exemplo_novo.html"
-        }
-      ]
-    },
-    {
-      "title": "Faturamento",
-      "icon": "fal fa-chart-line",
-      "items": [
-        {
-          "title": "Lista",
-          "href": "7exemplo_lista.html"
-        },
-        {
-          "title": "Novo",
-          "href": "77exemplo_novo.html"
-        }
-      ]
-    },
-    {
-      "title": "Financeiro",
-      "icon": "fal fa-money-bill",
-      "items": [
-        {
-          "title": "Lista",
-          "href": "8exemplo_lista.html"
-        },
-        {
-          "title": "Novo",
-          "href": "88exemplo_novo.html"
+          "title": "Moedas",
+          "href": "/moeda"
         }
       ]
     }

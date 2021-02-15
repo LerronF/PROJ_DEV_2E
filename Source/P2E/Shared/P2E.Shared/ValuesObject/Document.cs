@@ -1,24 +1,35 @@
 ﻿using FluentValidator;
 using FluentValidator.Validation;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using P2E.Shared.Enum;
+using P2E.Shared.TypeConverter;
+using System.ComponentModel;
 
 namespace P2E.Shared.ValuesObject
 {
+    [TypeConverter(typeof(DocumentTypeConvert))]
     public class Document : Notifiable
     {
-        public Document(string number)
+        //public Document()
+        //{
+
+        //}
+        public Document(string number, eTIPODOC tipodoc = eTIPODOC.CNPJ)
         {
             this.Number = number;
             AddNotifications(
                 new ValidationContract()
-                .IsTrue(IsCpf(number), "Document", "Documento inválido.")
+                .IsTrue(tipodoc == eTIPODOC.CNPJ ? IsCnpj(number) : IsCpf(number), "Document", "Documento inválido.")
             );
         }
         public string Number { get; private set; }
 
         public override string ToString() => Number;
+
+        public static Document FromString(string value)
+        {
+            var result = new Document(value);
+            return result;
+        }
 
         public static bool IsCpf(string cpf)
         {

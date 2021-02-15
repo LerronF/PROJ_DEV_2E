@@ -1,0 +1,70 @@
+﻿@model P2E.Main.UI.Web.Models.SSO.Modulo.ModuloViewModel
+@{
+    ViewData["Title"] = "Cadastro";
+    ViewData["PageName"] = "modulo_novo";
+    ViewData["Category1"] = "Modulo";
+
+    //Alert info
+    var type = (string)TempData["_alert.type"];
+    var title = (string)TempData["_alert.title"];
+    var body = (string)TempData["_alert.body"];
+}
+
+<div class="row">
+    <div class="col-xl-12">
+
+        @if (!string.IsNullOrEmpty(type))
+        {
+            <partial name="_DisplayMessagePartial" />
+        }
+
+        <div class="panel">
+            <div class="panel-hdr">
+                @if (Model.CD_MOD > 0)
+                {
+                    <h1>
+                        Edição de Modulos
+                    </h1>
+                }
+                else
+                {
+                    <h1>
+                        Cadastro de Modulos
+                    </h1>
+                }
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <form asp-action="Save" method="post">
+                        <input type="hidden" asp-for="CD_MOD" />
+                        <div class="form-group">
+                            <label class="form-label" asp-for="TX_DSC">Descrição</label>
+                            <input type="text" maxlength="40" asp-for="TX_DSC" placeholder="Descrição" class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-success">Salvar</button>
+                        @*<button type="button" class="btn btn-primary" value="Cancel" onclick="history.back();">Cancelar</button>*@
+
+                        <button data-controller="Grupo" data-id="@Model.CD_MOD"
+                                data-action="Cancel"
+                                data-body-message="Deseja cancelar as alterações?"
+                                style="font-weight:normal;cursor:pointer" class=" delete btn btn-primary">
+                            Cancelar
+                        </button>
+
+                        @if (Model.CD_MOD > 0)
+                        {
+                            <button data-id="@Model.CD_MOD"
+                                    data-controller="Modulo"
+                                    data-action="Delete"
+                                    data-body-message="Deseja excluir este Modulo?"
+                                    style="font-weight:normal;cursor:pointer" class="delete btn btn-danger">
+                                Deletar
+                            </button>
+                        }
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

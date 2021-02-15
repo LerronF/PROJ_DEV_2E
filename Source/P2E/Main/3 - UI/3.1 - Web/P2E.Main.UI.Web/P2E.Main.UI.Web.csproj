@@ -1,21 +1,100 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Extensions\NewFolder\**" />
+    <Content Remove="Extensions\NewFolder\**" />
+    <EmbeddedResource Remove="Extensions\NewFolder\**" />
+    <None Remove="Extensions\NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\Rotina\Cadastro.cshtml" />
+    <Content Remove="Views\Rotina\Lista.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Scripts\Grupo\Grupo.ts" />
+    <None Remove="Scripts\Grupo\GrupoIndex.ts" />
+    <None Remove="Scripts\Moeda\Moeda.ts" />
+    <None Remove="Scripts\Moeda\MoedaIndex.ts" />
+    <None Remove="Scripts\ParceiroNegocio\ParceiroNegocioIndex.ts" />
+    <None Remove="Scripts\ParceiroNegocio\ParceiroNegocioServicoModulo.ts" />
+    <None Remove="Scripts\ParceiroNegocio\TabelaParceiroNegocioServicoModulo.ts" />
+    <None Remove="Scripts\Rotina\RotinaIndex.ts" />
+    <None Remove="Scripts\Servico\ServicoIndex.ts" />
+    <None Remove="Scripts\Usuario\RotinaUsuarioOperacao.ts" />
+    <None Remove="Scripts\Usuario\TabelaUsuarioModulo.ts" />
+    <None Remove="Scripts\Usuario\UsuarioCadastro.ts" />
+    <None Remove="Scripts\Usuario\TabelaUsuarioGrupo.ts" />
+    <None Remove="Scripts\Usuario\UsuarioIndex.ts" />
+  </ItemGroup>
 
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.1.1" />
+    <PackageReference Include="Core.Flash2" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNet.Identity.Core" Version="2.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="2.2.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
   </ItemGroup>
 
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Administrativo\0 - Domain\P2E.Administrativo.Domain\P2E.Administrativo.Domain.csproj" />
+    <ProjectReference Include="..\..\..\..\Importacao\2 - API\P2E.Importacao.API\P2E.Importacao.API.csproj" />
+    <ProjectReference Include="..\..\..\..\Shared\P2E.Shared\P2E.Shared.csproj" />
+    <ProjectReference Include="..\..\..\..\SSO\2 - API\P2E.SSO.API\P2E.SSO.API.csproj" />
     <ProjectReference Include="..\..\..\2 - API\P2E.Main.API\P2E.Main.API.csproj" />
   </ItemGroup>
+
+
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\Grupo\Grupo.ts" />
+    <TypeScriptCompile Include="Scripts\Grupo\GrupoIndex.ts" />
+    <TypeScriptCompile Include="Scripts\Moeda\Moeda.ts" />
+    <TypeScriptCompile Include="Scripts\Moeda\MoedaIndex.ts" />
+    <TypeScriptCompile Include="Scripts\ParceiroNegocio\ParceiroNegocioIndex.ts" />
+    <TypeScriptCompile Include="Scripts\ParceiroNegocio\TabelaParceiroNegocioServicoModulo.ts" />
+    <TypeScriptCompile Include="Scripts\ParceiroNegocio\ParceiroNegocioServicoModulo.ts" />
+    <TypeScriptCompile Include="Scripts\Rotina\RotinaIndex.ts" />
+    <TypeScriptCompile Include="Scripts\Servico\ServicoIndex.ts" />
+    <TypeScriptCompile Include="Scripts\Usuario\RotinaUsuarioOperacao.ts" />
+    <TypeScriptCompile Include="Scripts\Usuario\TabelaUsuarioModulo.ts" />
+    <TypeScriptCompile Include="Scripts\Usuario\UsuarioCadastro.ts" />
+    <TypeScriptCompile Include="Scripts\Usuario\TabelaUsuarioGrupo.ts" />
+    <TypeScriptCompile Include="Scripts\Usuario\UsuarioIndex.ts" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="wwwroot\js\Usuario\" />
+  </ItemGroup>
+
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptTarget>ES2015</TypeScriptTarget>
+    <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
+    <TypeScriptModuleKind>ES6</TypeScriptModuleKind>
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir />
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>True</TypeScriptSourceMap>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
+  </PropertyGroup>
 
 </Project>
